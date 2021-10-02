@@ -42,13 +42,13 @@ void print_file_time(const FILETIME& f_time, const std::string& time_name) {
 }
 
 void process_get_file_time() {
-	TCHAR path[constants::buffer_size];
+	std::wstring path;
 	std::cout << "Enter the full path and name of the file to get time info "
 		<< "(or press enter without input to abort process):\n";
-	std::wcin.getline(path, constants::buffer_size);
-	if (path[0] == 0)
+	std::getline(std::wcin, path);
+	if (path.empty())
 		return;
-	HANDLE handle = CreateFile(path, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, 0, NULL);
+	HANDLE handle = CreateFile(path.c_str(), GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, 0, NULL);
 	if (handle != INVALID_HANDLE_VALUE) {
 		FILETIME fc_time, fa_time, fw_time;
 		if (GetFileTime(handle, &fc_time, &fa_time, &fw_time)) {
