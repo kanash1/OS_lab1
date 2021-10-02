@@ -15,7 +15,7 @@ void print_file_time(const FILETIME&, const std::string&);
 void process_get_file_time();
 void print_file_attributes(DWORD);
 void process_get_file_attributes();
-void processFileInformation();
+void process_file_information();
 void process_set_file_time();
 void process_set_file_attributes(DWORD);
 

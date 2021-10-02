@@ -54,7 +54,7 @@ Menu make_attributesmanagmentmenu() {
 		std::vector<Item>({
 			Item("Get attributes", []() { process_get_file_attributes(); system("pause"); }),
 			Item("Get time attributes", []() { process_get_file_time(); system("pause"); }),
-			Item("Get attributes by handle", []() { processFileInformation(); system("pause"); }),
+			Item("Get attributes by handle", []() { process_file_information(); system("pause"); }),
 			Item("Set attributes", []() { menu_process(make_attributesmenu()); }),
 			Item("Set time attributes", []() { process_set_file_time(); system("pause"); })
 			})
@@ -65,9 +65,8 @@ Menu make_drivesmenu() {
 	std::vector<Item> v_items;
 	std::vector<char> v_drives = get_drives();
 	for (const auto& drive : v_drives) {
-		std::string s_drive = { drive };
 		v_items.push_back(
-			Item(s_drive,
+			Item(std::string(1, drive),
 				[=]() {
 					const TCHAR path[constants::drive_path_size] = { drive, ':', '\\', '\0'};
 					print_drive_type(path);
@@ -86,30 +85,66 @@ Menu make_drivesmenu() {
 }
 
 Menu make_attributesmenu() {
-	std::vector<Item> v_items;
-	std::vector<DWORD> v_attribures({
-		FILE_ATTRIBUTE_ARCHIVE,
-		FILE_ATTRIBUTE_HIDDEN,
-		FILE_ATTRIBUTE_NORMAL,
-		FILE_ATTRIBUTE_NOT_CONTENT_INDEXED,
-		FILE_ATTRIBUTE_OFFLINE,
-		FILE_ATTRIBUTE_READONLY,
-		FILE_ATTRIBUTE_SYSTEM,
-		FILE_ATTRIBUTE_TEMPORARY
-	});
-	for (const auto& attribute : v_attribures) {
-		v_items.push_back(
-			Item(file_attribute_to_string(attribute),
-				[=]() {
-					process_set_file_attributes(attribute);
-					system("pause");
-				}
-			)
-		);
-	}
 	return Menu(
 		"ATTRIBUTES MENU",
 		"Go back",
-		v_items
+		std::vector<Item>({
+			Item(
+				file_attribute_to_string(FILE_ATTRIBUTE_ARCHIVE),
+				[]() {
+					process_set_file_attributes(FILE_ATTRIBUTE_ARCHIVE);
+					system("pause");
+				}
+			),
+			Item(
+				file_attribute_to_string(FILE_ATTRIBUTE_HIDDEN),
+				[]() {
+					process_set_file_attributes(FILE_ATTRIBUTE_HIDDEN);
+					system("pause");
+				}
+			),
+			Item(
+				file_attribute_to_string(FILE_ATTRIBUTE_NORMAL),
+				[]() {
+					process_set_file_attributes(FILE_ATTRIBUTE_NORMAL);
+					system("pause");
+				}
+			),
+			Item(
+				file_attribute_to_string(FILE_ATTRIBUTE_NOT_CONTENT_INDEXED),
+				[]() {
+					process_set_file_attributes(FILE_ATTRIBUTE_NOT_CONTENT_INDEXED);
+					system("pause");
+				}
+			),
+			Item(
+				file_attribute_to_string(FILE_ATTRIBUTE_OFFLINE),
+				[]() {
+					process_set_file_attributes(FILE_ATTRIBUTE_OFFLINE);
+					system("pause");
+				}
+			),
+			Item(
+				file_attribute_to_string(FILE_ATTRIBUTE_READONLY),
+				[]() {
+					process_set_file_attributes(FILE_ATTRIBUTE_READONLY);
+					system("pause");
+				}
+			),
+			Item(
+				file_attribute_to_string(FILE_ATTRIBUTE_SYSTEM),
+				[]() {
+					process_set_file_attributes(FILE_ATTRIBUTE_SYSTEM);
+					system("pause");
+				}
+			),
+			Item(
+				file_attribute_to_string(FILE_ATTRIBUTE_TEMPORARY),
+				[]() {
+					process_set_file_attributes(FILE_ATTRIBUTE_TEMPORARY);
+					system("pause");
+				}
+			)
+		})
 	);
 }

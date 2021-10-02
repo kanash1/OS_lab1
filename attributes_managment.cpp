@@ -110,7 +110,7 @@ void process_get_file_attributes() {
 		<< GetLastError() << '\n';
 }
 
-void processFileInformation() {
+void process_file_information() {
 	std::string path;
 	std::cout << "Enter the full path and name of the file to get info by handle "
 		<< "(or press enter without input to abort process):\n";
