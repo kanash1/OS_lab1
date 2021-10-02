@@ -78,7 +78,6 @@ Menu make_drivesmenu() {
 			)
 		);
 	}
-	v_items.size();
 	return Menu(
 		"DRIVES MENU",
 		"Go back",

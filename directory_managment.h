@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <windows.h>
+#include <string>
 #include "constants.h"
 
 void process_ñreate_directory();

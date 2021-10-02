@@ -61,12 +61,12 @@ std::string file_system_flag_to_sring(DWORD flag) {
 	}
 }
 
-void print_drive_type(LPCWSTR drive_path_name) {
+void print_drive_type(LPCSTR drive_path_name) {
 	UINT drive_type = GetDriveType(drive_path_name);
 	std::cout << "Type of drive: " << drive_type_to_string(drive_type) << '\n';
 }
 
-void print_volume_information(LPCWSTR drive_path_name) {
+void print_volume_information(LPCSTR drive_path_name) {
 	const std::set<DWORD> s_flags({
 		FILE_CASE_PRESERVED_NAMES,
 		FILE_CASE_SENSITIVE_SEARCH,
@@ -108,7 +108,7 @@ void print_volume_information(LPCWSTR drive_path_name) {
 	}
 }
 
-void print_disk_free_space(LPCWSTR drive_path_name) {
+void print_disk_free_space(LPCSTR drive_path_name) {
 	DWORD sectors_per_cluster = 0;
 	DWORD bytes_per_sector = 0;
 	DWORD number_of_free_clusters = 0;

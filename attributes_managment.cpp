@@ -42,10 +42,10 @@ void print_file_time(const FILETIME& f_time, const std::string& time_name) {
 }
 
 void process_get_file_time() {
-	std::wstring path;
+	std::string path;
 	std::cout << "Enter the full path and name of the file to get time info "
 		<< "(or press enter without input to abort process):\n";
-	std::getline(std::wcin, path);
+	std::getline(std::cin, path);
 	if (path.empty())
 		return;
 	HANDLE handle = CreateFile(path.c_str(), GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, 0, NULL);
@@ -96,13 +96,13 @@ void print_file_attributes(DWORD file_attributes) {
 }
 
 void process_get_file_attributes() {
-	TCHAR path[constants::buffer_size];
+	std::string path;
 	std::cout << "Enter the full path and name of the file to get attributes "
 		<< "(or press enter without input to abort process):\n";
-	std::wcin.getline(path, constants::buffer_size);
-	if (path[0] == 0)
+	std::getline(std::cin, path);
+	if (path.empty())
 		return;
-	DWORD file_attributes = GetFileAttributes(path);
+	DWORD file_attributes = GetFileAttributes(path.c_str());
 	if (file_attributes != INVALID_FILE_ATTRIBUTES)
 		print_file_attributes(file_attributes);
 	else
@@ -111,13 +111,13 @@ void process_get_file_attributes() {
 }
 
 void processFileInformation() {
-	TCHAR path[constants::buffer_size];
+	std::string path;
 	std::cout << "Enter the full path and name of the file to get info by handle "
 		<< "(or press enter without input to abort process):\n";
-	std::wcin.getline(path, constants::buffer_size);
-	if (path[0] == 0)
+	std::getline(std::cin, path);
+	if (path.empty())
 		return;
-	HANDLE handle = CreateFile(path, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, 0, NULL);
+	HANDLE handle = CreateFile(path.c_str(), GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, 0, NULL);
 	if (handle != INVALID_HANDLE_VALUE) {
 		BY_HANDLE_FILE_INFORMATION bhfi;
 		if (GetFileInformationByHandle(handle, &bhfi)) {
@@ -145,13 +145,13 @@ void processFileInformation() {
 }
 
 void process_set_file_time() {
-	TCHAR path[constants::buffer_size];
+	std::string path;
 	std::cout << "Enter the full path and name of the file to set time info "
 		<< "(or press enter without input to abort process):\n";
-	std::wcin.getline(path, constants::buffer_size);
-	if (path[0] == 0)
+	std::getline(std::cin, path);
+	if (path.empty())
 		return;
-	HANDLE handle = CreateFile(path, GENERIC_WRITE | GENERIC_READ,
+	HANDLE handle = CreateFile(path.c_str(), GENERIC_WRITE | GENERIC_READ,
 		FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, 0, NULL);
 	if (handle != INVALID_HANDLE_VALUE) {
 		SYSTEMTIME s_time;
@@ -181,13 +181,13 @@ void process_set_file_time() {
 }
 
 void process_set_file_attributes(DWORD attribute) {
-	TCHAR path[constants::buffer_size];
+	std::string path;
 	std::cout << "Enter the full path and name of the file to set time info "
 		<< "(or press enter without input to abort process):\n";
-	std::wcin.getline(path, constants::buffer_size);
-	if (path[0] == 0)
+	std::getline(std::cin, path);
+	if (path.empty())
 		return;
-	if (SetFileAttributes(path, attribute))
+	if (SetFileAttributes(path.c_str(), attribute))
 		std::cout << "New attribute succesfully set\n";
 	else
 		std::cout << "Error occurred while setting attribute. Error code: "
