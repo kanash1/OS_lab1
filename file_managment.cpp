@@ -10,8 +10,10 @@ void process_create_file() {
 	HANDLE handle = CreateFile(path.c_str(), GENERIC_READ | GENERIC_WRITE,
 		FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
 		nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-	if (handle != INVALID_HANDLE_VALUE)
+	if (handle != INVALID_HANDLE_VALUE) {
 		std::cout << "The file was created successfully\n";
+		CloseHandle(handle);
+	}
 	else
 		std::cout << "Error occurred while creating the file. Error code: " << GetLastError() << '\n';
 }
