@@ -127,12 +127,12 @@ void process_file_information() {
 			print_file_time(bhfi.ftLastAccessTime, "Last access time");
 			print_file_time(bhfi.ftLastWriteTime, "Last write time");
 			std::cout << "File size: "
-				<< (static_cast<long long>(bhfi.nFileSizeHigh) << 32)
-				+ static_cast<long long>(bhfi.nFileSizeLow) << '\n';
+				<< (static_cast<unsigned long long>(bhfi.nFileSizeHigh) << 32)
+				+ static_cast<unsigned long long>(bhfi.nFileSizeLow) << '\n';
 			std::cout << "Number of links: " << bhfi.nNumberOfLinks << '\n';
 			std::cout << "Unique identifier: "
-				<< (static_cast<long long>(bhfi.nFileIndexHigh) << 32)
-				+ static_cast<long long>(bhfi.nFileIndexLow) << '\n';
+				<< (static_cast<unsigned long long>(bhfi.nFileIndexHigh) << 32)
+				+ static_cast<unsigned long long>(bhfi.nFileIndexLow) << '\n';
 			CloseHandle(handle);
 		}
 		else
